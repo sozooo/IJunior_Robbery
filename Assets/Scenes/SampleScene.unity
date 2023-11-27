@@ -1140,9 +1140,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 674909046}
-  - component: {fileID: 674909045}
   - component: {fileID: 674909047}
   - component: {fileID: 674909048}
+  - component: {fileID: 674909045}
+  - component: {fileID: 674909049}
   m_Layer: 0
   m_Name: Siren
   m_TagString: Untagged
@@ -1162,10 +1163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061bb8266156da945be7e812b9a80b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 1603243609}
-  _audioSource: {fileID: 674909047}
-  _radius: 5
-  _recoveryRate: 1
   _maxVolume: 0.3
 --- !u!4 &674909046
 Transform:
@@ -1330,6 +1327,35 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &674909049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674909044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 197ff5554ccff7049bcf06bdc612da09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 674909045}
+        m_TargetAssemblyTypeName: VolumeScript, Assembly-CSharp
+        m_MethodName: VolumeChanger
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: VolumeChanger
+          m_BoolArgument: 0
+        m_CallState: 2
+  _target: {fileID: 1603243609}
+  _radius: 3
 --- !u!1 &782909820
 GameObject:
   m_ObjectHideFlags: 0
@@ -1388,7 +1414,7 @@ GameObject:
   - component: {fileID: 1147474609}
   - component: {fileID: 1147474608}
   m_Layer: 0
-  m_Name: background
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
