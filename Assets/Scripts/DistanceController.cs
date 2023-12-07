@@ -1,22 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEngine.GraphicsBuffer;
 
 public class DistanceController : MonoBehaviour
 {
-    [SerializeField] private UnityEvent<float> _entered;
-    [SerializeField] private GameObject _target;
-    [SerializeField] private float _radius;
+    [SerializeField] private VolumeChanger _volumeChanger;
 
-    private float _distance;
-
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        _distance = (_target.transform.position - transform.position).magnitude;
-
-        Debug.Log("Коэф = " + _distance / _radius);
-        _entered.Invoke(_distance / _radius);
+        if(collision.TryGetComponent<MoveScript>(out MoveScript moveScript))
+        {
+            _volumeChanger.Invoke(0.3f,1f);
+        }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent<MoveScript>(out MoveScript moveScript))
+        {
+            _volumeChanger.Invoke(0f, 1f);
+        }
+    }
+
+    [System.Serializable]
+    public class VolumeChanger : UnityEvent<float, float> { }
 }

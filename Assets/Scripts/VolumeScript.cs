@@ -8,25 +8,33 @@ public class VolumeScript : MonoBehaviour
     [SerializeField] private float _maxVolume;
 
     private AudioSource _sound;
-    private float _minVolume = 0f;
-    private VolumeChanger _volumeChanger;
-    //private float _recoveryRate = 0f;
 
     private void Start()
     {
         _sound = GetComponent<AudioSource>();
+        _sound.volume = 0f;
     }
 
-
-    
-    public void VolumeChanger(float maxDelta)
+    public void StartVolumeChange(float targetVolume, float duration)
     {
-        Debug.Log("MaxDelta  = " + _sound.volume);
+        StartCoroutine(VolumeChanger(targetVolume, duration));
+    }
 
-        _sound.volume = Mathf.Lerp(_maxVolume, _minVolume, maxDelta);
-        Debug.Log("Звук  = " + _sound.volume);
+    private IEnumerator VolumeChanger(float targetVolume, float duration)
+    {
+        float currentTime = 0;
+        float start = _sound.volume;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            _sound.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
+            Debug.Log("_sound.Volume = " + _sound.volume);
+
+            yield return null;
+        }
+
+        yield break;
+
     }
 }
-
-[System.Serializable]
-public class VolumeChanger : UnityEvent<float> { }
