@@ -29,7 +29,6 @@ public class VolumeScript : MonoBehaviour
         {
             currentTime += Time.deltaTime;
             _sound.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
-            Debug.Log("_sound.Volume = " + _sound.volume);
 
             yield return null;
         }
