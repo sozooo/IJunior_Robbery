@@ -1345,7 +1345,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 674909045}
         m_TargetAssemblyTypeName: VolumeScript, Assembly-CSharp
-        m_MethodName: VolumeChanger
+        m_MethodName: StartVolumeChange
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
