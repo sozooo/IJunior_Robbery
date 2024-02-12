@@ -1,12 +1,8 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class VolumeScript : MonoBehaviour
+public class SirenStateChanger : MonoBehaviour
 {
-    [SerializeField] private float _maxVolume;
-
     private AudioSource _sound;
 
     private void Start()
@@ -15,12 +11,12 @@ public class VolumeScript : MonoBehaviour
         _sound.volume = 0f;
     }
 
-    public void StartVolumeChange(float targetVolume, float duration)
+    public void StartChanging(float targetVolume, float duration)
     {
-        StartCoroutine(VolumeChanger(targetVolume, duration));
+        StartCoroutine(ChangeState(targetVolume, duration));
     }
 
-    private IEnumerator VolumeChanger(float targetVolume, float duration)
+    private IEnumerator ChangeState(float targetVolume, float duration)
     {
         float currentTime = 0;
         float start = _sound.volume;
@@ -29,7 +25,6 @@ public class VolumeScript : MonoBehaviour
         {
             currentTime += Time.deltaTime;
             _sound.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
-            Debug.Log("_sound.Volume = " + _sound.volume);
 
             yield return null;
         }
