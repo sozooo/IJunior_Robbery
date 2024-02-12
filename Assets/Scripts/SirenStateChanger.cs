@@ -30,6 +30,5 @@ public class SirenStateChanger : MonoBehaviour
         }
 
         yield break;
-
     }
 }
