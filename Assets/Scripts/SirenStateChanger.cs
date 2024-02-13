@@ -1,19 +1,32 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class SirenStateChanger : MonoBehaviour
 {
+    [SerializeField] private float _maxVolume = 1f;
+    [SerializeField] private float _changingDuration = 1f;
+
     private AudioSource _sound;
+    private float _minVolume = 0f;
 
     private void Start()
     {
         _sound = GetComponent<AudioSource>();
+        _sound.Stop();
         _sound.volume = 0f;
     }
 
-    public void StartChanging(float targetVolume, float duration)
+    public void EnableSiren()
     {
-        StartCoroutine(ChangeState(targetVolume, duration));
+        _sound.Play();
+
+        StartCoroutine(ChangeState(_maxVolume, _changingDuration));
+    }
+
+    public void DisableSiren()
+    {
+        StartCoroutine(ChangeState(_minVolume, _changingDuration));
     }
 
     private IEnumerator ChangeState(float targetVolume, float duration)
@@ -29,6 +42,7 @@ public class SirenStateChanger : MonoBehaviour
             yield return null;
         }
 
-        yield break;
+        if (_sound.volume == 0)
+            _sound.Stop();
     }
 }
